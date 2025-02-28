@@ -48,7 +48,8 @@ export const signUp = async (req: Request, res: Response) => {
                 email: newUser.email,
                 fullname: newUser.fullname,
                 profilePic: newUser.profilePic,
-            })
+            }) 
+            return
         }
         else{
             res.status(400).json({message: 'Invalid user data'});
@@ -68,9 +69,8 @@ export const signUp = async (req: Request, res: Response) => {
 }
 
 export const login = async (req: Request, res: Response) => {
-    const {email, password} = req.body;
-
     try{
+        const {email, password} = req.body;
 
         if(!email || !password) {
             res.status(400).json({message: "All fields required"});
@@ -102,6 +102,8 @@ export const login = async (req: Request, res: Response) => {
             fullname: user.fullname,
             profilePic: user.profilePic
         });
+
+        return
     }
     catch(err) {
         if(err instanceof Error) {
@@ -109,6 +111,7 @@ export const login = async (req: Request, res: Response) => {
             res.status(500).json({
                 message: 'Server not responding'
             });
+            return
         }
     }
 }
