@@ -12,9 +12,10 @@ interface chatState {
     getUsers: ()=> void,
     getMessages: (userId: string) => void,
     setSelectedUser: (selectedUser: any)=> void;
+    sendMessage: (data: {text: string, image: string | ArrayBuffer |null})=> void,
 }
 
-export const useChatStore = create<chatState>((set)=> ({
+export const useChatStore = create<chatState>((set, get)=> ({
     messages: [],
     users: [],
     selectedUser: null,
@@ -55,5 +56,22 @@ export const useChatStore = create<chatState>((set)=> ({
             set({isChatsLoading: false});
         }
     },
-    setSelectedUser: (selectedUser) => {set({selectedUser: selectedUser})} 
+    setSelectedUser: (selectedUser) => {set({selectedUser: selectedUser})} ,
+    sendMessage: async (messageData) => {
+        const {selectedUser, messages} = get();
+        try{
+            const res = await axiosInstance.post(`/message/send/${selectedUser._id}`, messageData);
+            set({messages: [...messages, res.data]});
+        }
+        catch(err){
+            if(isAxiosError(err))  {
+                toast.error(err.response?.data.message);
+                console.log(err);
+            }
+            else{
+                toast.error('Unkown Error');
+                console.log(err);
+            }
+        }
+    }
 }))
