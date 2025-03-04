@@ -1,4 +1,4 @@
-import { useEffect, useRef, DetailedHTMLProps, HTMLAttributes } from "react";
+import { useEffect, useRef} from "react";
 import { useChatStore } from "../store/useChatStore";
 import ChatHeader from "./ChatHeader";
 import avatar from "../assets/207-2074624_white-gray-circle-avatar-png-transparent-png.png"
