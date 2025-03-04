@@ -12,10 +12,10 @@ import { connectDB } from './lib/db';
 
 import cookieParser from 'cookie-parser';
 
+import {io, app, server} from './lib/socket'
+
 
 dotenv.config();
-
-const app = express();
 
 app.use(cors({
     origin: 'http://localhost:5173',
@@ -31,8 +31,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/message', messageRouter);
 
 const PORT = process.env.PORT;
-
-app.listen(PORT || 3000, ()=> {
+server.listen(PORT || 3000, ()=> {
     console.log(`server started at port: ${PORT}`)
     connectDB(process.env.MONGOURL as string);
 })

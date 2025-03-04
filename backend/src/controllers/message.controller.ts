@@ -3,6 +3,8 @@ import { AuthRequest } from "../middlewares/auth.middleware";
 import User from "../models/user.model";
 import Message from "../models/message.model";
 import cloudinary from "../lib/cloudinary";
+import { getReciverSocketId } from "../lib/socket";
+import { io } from "../lib/socket";
 
 export const getAllUser = async (req: AuthRequest, res: Response) => {
     try {
@@ -31,7 +33,7 @@ export const getMessages = async (req: AuthRequest, res: Response) => {
 
         const messages = await Message.find({
             $or: [
-                { senderId: myId, recieverId: chatUserId },
+                { senderId: myId, reciverId: chatUserId },
                 { senderId: chatUserId, reciverId: myId }
             ]
         })
@@ -73,9 +75,15 @@ export const sendMessage = async (req: AuthRequest, res: Response) => {
             image: imageUrl
         })
 
-        newMessage.save();
+        const response = await newMessage.save();
 
-        res.status(200).json(newMessage);
+        const reciverSockedId = getReciverSocketId(reciverId);
+
+        if(reciverSockedId) {
+            io.to(reciverSockedId).emit('newMessage', response);
+        }
+
+        res.status(200).json(response);
 
     }  catch (err) {
         if (err instanceof Error) {

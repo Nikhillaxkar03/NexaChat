@@ -11,14 +11,14 @@ import { useEffect } from "react";
 import { DotLoader } from "react-spinners";
 import { useThemeStore } from "./store/useThemeStore";
 function App() {
-  const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
-  const {theme, setTheme} = useThemeStore();
+  const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore();
+  const {theme} = useThemeStore();
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
 
-  console.log(authUser);
+  console.log(onlineUsers);
 
   if (isCheckingAuth && !authUser) {
     return (
