@@ -44,7 +44,7 @@ if(process.env.NODE_ENV !== "development") {
 }
 
 
-server.listen(PORT || 3000, ()=> {
+server.listen(process.env.PORT || 3000, ()=> {
     console.log(`server started at port: ${PORT}`)
     connectDB(process.env.MONGOURL as string);
 })
