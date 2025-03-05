@@ -34,18 +34,12 @@ app.use('/api/message', messageRouter);
 
 const PORT = process.env.PORT;
 
-const __dirname = path.resolve();
-
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-app.get('*', (req: Request, res: Response) => {
-    console.log(__dirname);
-    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-} )
+const __dirname = path.resolve();  
 
 if(process.env.NODE_ENV !== "development") {
     app.use(express.static(path.join(__dirname, "../frontend/dist")));
     app.get('*', (req: Request, res: Response) => {
-        res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+        res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
     } )
 }
 
