@@ -1,7 +1,7 @@
 import express from 'express';
 
-import {signUp, login, signOut, updateProfile, checkAuth} from '../controllers/auth.controller'
-import { userAuth } from '../middlewares/auth.middleware';
+import {signUp, login, signOut, updateProfile, checkAuth} from '../controllers/auth.controller.js'
+import { userAuth } from '../middlewares/auth.middleware.js';
 
 const authRouter = express.Router();
 

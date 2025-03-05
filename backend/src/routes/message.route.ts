@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { userAuth } from "../middlewares/auth.middleware";
-import { getAllUser, getMessages, sendMessage } from "../controllers/message.controller";
+import { userAuth } from "../middlewares/auth.middleware.js";
+import { getAllUser, getMessages, sendMessage } from "../controllers/message.controller.js";
 
 const messageRouter = Router();
 

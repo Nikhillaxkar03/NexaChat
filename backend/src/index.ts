@@ -2,17 +2,17 @@ import express, {Request, Response} from 'express';
 
 import dotenv from 'dotenv';
 
-import { authRouter } from './routes/auth.route';
+import { authRouter } from './routes/auth.route.js';
 
-import messageRouter from './routes/message.route';
+import messageRouter from './routes/message.route.js';
 
 import cors from 'cors';
 
-import { connectDB } from './lib/db';
+import { connectDB } from './lib/db.js';
 
 import cookieParser from 'cookie-parser';
 
-import {io, app, server} from './lib/socket'
+import {app, server} from './lib/socket.js'
 
 import path from 'path';
 

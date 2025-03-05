@@ -2,12 +2,12 @@ import { Request, Response } from "express";
 
 import bcrypt from 'bcrypt';
 
-import User from "../models/user.model";
+import User from "../models/user.model.js";
 
-import { generateToken } from "../lib/utils";
-import cloudinary from "../lib/cloudinary";
+import { generateToken } from "../lib/utils.js";
+import cloudinary from "../lib/cloudinary.js";
 
-import { AuthRequest } from "../middlewares/auth.middleware";
+import { AuthRequest } from "../middlewares/auth.middleware.js";
 
 export const signUp = async (req: Request, res: Response) => {
     const {email, fullname, password} = req.body;

@@ -1,10 +1,10 @@
 import { Response } from "express";
-import { AuthRequest } from "../middlewares/auth.middleware";
-import User from "../models/user.model";
-import Message from "../models/message.model";
-import cloudinary from "../lib/cloudinary";
-import { getReciverSocketId } from "../lib/socket";
-import { io } from "../lib/socket";
+import { AuthRequest } from "../middlewares/auth.middleware.js";
+import User from "../models/user.model.js";
+import Message from "../models/message.model.js";
+import cloudinary from "../lib/cloudinary.js";
+import { getReciverSocketId } from "../lib/socket.js";
+import { io } from "../lib/socket.js";
 
 export const getAllUser = async (req: AuthRequest, res: Response) => {
     try {
